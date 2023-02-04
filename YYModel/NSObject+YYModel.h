@@ -168,52 +168,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable NSString *)yy_modelToJSONString;
 
-/**
- Copy a instance with the receiver's properties.
- 
- @return A copied instance, or nil if an error occurs.
- */
-- (nullable id)yy_modelCopy;
-
-/**
- Encode the receiver's properties to a coder.
- 
- @param aCoder  An archiver object.
- */
-- (void)yy_modelEncodeWithCoder:(NSCoder *)aCoder;
-
-/**
- Decode the receiver's properties from a decoder.
- 
- @param aDecoder  An archiver object.
- 
- @return self
- */
-- (id)yy_modelInitWithCoder:(NSCoder *)aDecoder;
-
-/**
- Get a hash code with the receiver's properties.
- 
- @return Hash code.
- */
-- (NSUInteger)yy_modelHash;
-
-/**
- Compares the receiver with another object for equality, based on properties.
- 
- @param model  Another object.
- 
- @return `YES` if the reciever is equal to the object, otherwise `NO`.
- */
-- (BOOL)yy_modelIsEqual:(id)model;
-
-/**
- Description method for debugging purposes based on properties.
- 
- @return A string that describes the contents of the receiver.
- */
-- (NSString *)yy_modelDescription;
-
 @end
 
 
@@ -390,50 +344,6 @@ NS_ASSUME_NONNULL_BEGIN
  @return An array of property's name.
  */
 + (nullable NSArray<NSString *> *)modelPropertyWhitelist;
-
-/**
- This method's behavior is similar to `- (BOOL)modelCustomTransformFromDictionary:(NSDictionary *)dic;`, 
- but be called before the model transform.
- 
- @discussion If the model implements this method, it will be called before
- `+modelWithJSON:`, `+modelWithDictionary:`, `-modelSetWithJSON:` and `-modelSetWithDictionary:`.
- If this method returns nil, the transform process will ignore this model.
- 
- @param dic  The json/kv dictionary.
- 
- @return Returns the modified dictionary, or nil to ignore this model.
- */
-- (NSDictionary *)modelCustomWillTransformFromDictionary:(NSDictionary *)dic;
-
-/**
- If the default json-to-model transform does not fit to your model object, implement
- this method to do additional process. You can also use this method to validate the 
- model's properties.
- 
- @discussion If the model implements this method, it will be called at the end of
- `+modelWithJSON:`, `+modelWithDictionary:`, `-modelSetWithJSON:` and `-modelSetWithDictionary:`.
- If this method returns NO, the transform process will ignore this model.
- 
- @param dic  The json/kv dictionary.
- 
- @return Returns YES if the model is valid, or NO to ignore this model.
- */
-- (BOOL)modelCustomTransformFromDictionary:(NSDictionary *)dic;
-
-/**
- If the default model-to-json transform does not fit to your model class, implement
- this method to do additional process. You can also use this method to validate the
- json dictionary.
- 
- @discussion If the model implements this method, it will be called at the end of
- `-modelToJSONObject` and `-modelToJSONString`.
- If this method returns NO, the transform process will ignore this json dictionary.
- 
- @param dic  The json dictionary.
- 
- @return Returns YES if the model is valid, or NO to ignore this model.
- */
-- (BOOL)modelCustomTransformToDictionary:(NSMutableDictionary *)dic;
 
 @end
 
